@@ -9,6 +9,7 @@ public class EachBox : MonoBehaviour
     public AdvantageSystem advantageSystem;
     public int randomEffect;
     public TextMeshPro _text;
+    public GameObject ghost;
 
     void Start()
     {
@@ -16,7 +17,7 @@ public class EachBox : MonoBehaviour
         gridBehavior = GameObject.Find("GridManager").GetComponent<GridBehavior>();
         advantageSystem = GameObject.Find("GridManager").GetComponent<AdvantageSystem>();
         randomEffect = Random.Range(0, 9);
-
+        
         switch (randomEffect)
         {
             case 0:
@@ -55,6 +56,7 @@ public class EachBox : MonoBehaviour
         {
             bool isPlayer1 = other.gameObject == gridBehavior.player1;
             ApplyRandomEffect(isPlayer1);
+            Instantiate(ghost, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

@@ -294,6 +294,8 @@ MonoBehaviour:
   gridBehavior: {fileID: 0}
   advantageSystem: {fileID: 0}
   randomEffect: 0
+  _text: {fileID: 0}
+  ghost: {fileID: 5964250796083397990, guid: db68ee897ce36ae40bd5ec53de673084, type: 3}
 --- !u!54 &-7478608898819571538
 Rigidbody:
   m_ObjectHideFlags: 0
