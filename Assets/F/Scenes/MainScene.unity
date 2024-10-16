@@ -6399,7 +6399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8513304457010653100
 Transform:
   m_ObjectHideFlags: 0
@@ -6463,8 +6463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cfcf153372f454783fb9e6c1bcbfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minForce: 15
-  maxForce: 20
+  minForce: 50
+  maxForce: 75
   origin: {fileID: 963194225}
 --- !u!114 &8699186243725336158
 MonoBehaviour:
@@ -6510,7 +6510,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8354853925010457830}
   serializedVersion: 4
-  m_Mass: 2
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
