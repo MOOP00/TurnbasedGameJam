@@ -10,6 +10,7 @@ public class CameraControllerTurnBased : MonoBehaviour
     public float rotationSpeed = 50f;            // ความเร็วการหมุนรอบ
     public float orbitDuration = 3f;             // ระยะเวลาที่กล้องจะหมุนรอบ
     public float orbitDistance = 10f;            // ระยะห่างระหว่างกล้องกับจุดกลางระหว่างผู้เล่นและศัตรู
+    public float transitionDuration = 2f;        // ระยะเวลาที่ใช้ในการเคลื่อนกล้องกลับไปยังตำแหน่งคงที่
     private bool isOrbiting = false;             // ตัวเช็คสถานะว่ากล้องกำลังหมุนอยู่หรือไม่
 
     void Start()
@@ -67,14 +68,32 @@ public class CameraControllerTurnBased : MonoBehaviour
             yield return null;
         }
 
-        // หลังจากหมุนครบเวลาแล้ว กลับไปที่ตำแหน่งคงที่
-        SetFixedPosition();
+        // หลังจากหมุนครบเวลาแล้ว กล้องจะค่อยๆ เคลื่อนกลับไปยังตำแหน่งคงที่
+        yield return StartCoroutine(MoveToFixedPosition());
         isOrbiting = false;
     }
 
-    private void SetFixedPosition()
+    private IEnumerator MoveToFixedPosition()
     {
-        // ตั้งค่าตำแหน่งและมุมกล้องคงที่
+        // เก็บตำแหน่งเริ่มต้นและมุมหมุนเริ่มต้นของกล้อง
+        Vector3 startPosition = transform.position;
+        Quaternion startRotation = transform.rotation;
+
+        float elapsedTime = 0f;
+
+        // เคลื่อนกล้องจากตำแหน่งปัจจุบันไปยังตำแหน่งคงที่
+        while (elapsedTime < transitionDuration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            // ค่อยๆ เลื่อนตำแหน่งกล้องและหมุนกล้องให้กลับไปยังตำแหน่งและมุมคงที่
+            transform.position = Vector3.Lerp(startPosition, fixedPosition, elapsedTime / transitionDuration);
+            transform.rotation = Quaternion.Lerp(startRotation, Quaternion.Euler(fixedRotation), elapsedTime / transitionDuration);
+
+            yield return null;
+        }
+
+        // ทำให้แน่ใจว่ากล้องจะอยู่ที่ตำแหน่งคงที่
         transform.position = fixedPosition;
         transform.rotation = Quaternion.Euler(fixedRotation);
     }

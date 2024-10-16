@@ -382,9 +382,10 @@ MonoBehaviour:
   enemyTransform: {fileID: 332918731}
   fixedPosition: {x: 275.9281, y: 18.06047, z: 208.9593}
   fixedRotation: {x: 6.739, y: 99.287, z: -0.003}
-  rotationSpeed: 25
-  orbitDuration: 15
+  rotationSpeed: 30
+  orbitDuration: 12
   orbitDistance: 5
+  transitionDuration: 2
 --- !u!1 &707238949
 GameObject:
   m_ObjectHideFlags: 0
