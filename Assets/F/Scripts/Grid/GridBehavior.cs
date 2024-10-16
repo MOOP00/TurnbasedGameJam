@@ -1,10 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class GridBehavior : MonoBehaviour
 {
     public int gridSize = 10;  // Size of the grid (10x10x10 grid)
     public float moveSpeed = 0.2f;  // Speed of player movement
     public LayerMask obstacleLayer;  // Layer for obstacles
     public int maxStep = 5;  // Maximum steps a player can take in a single turn
-    private int stepLeft;  // Steps left for the current player
+    public int stepLeft;  // Steps left for the current player
 
     public Vector3 player1Pos;
     public Vector3 player2Pos;
@@ -123,12 +128,14 @@ public class GridBehavior : MonoBehaviour
             if (isPlayer1Turn)
             {
                 player1Pos = targetPos;
-                player1Moved = true;
+                if(maxStep<=0)
+                    player1Moved = true;
             }
             else
             {
                 player2Pos = targetPos;
-                player2Moved = true;
+                if(maxStep<=0)
+                    player2Moved = true;
             }
 
             // Decrement steps left
