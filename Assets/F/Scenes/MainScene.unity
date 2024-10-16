@@ -324,8 +324,6 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  maxStep: 100
-  stepLeft: 0
   player1Pos: {x: 0, y: 0, z: 0}
   player2Pos: {x: 0, y: 0, z: 0}
   player1: {fileID: 5745807960104226587}
@@ -334,6 +332,9 @@ MonoBehaviour:
     type: 3}
   _ref: {fileID: 148818980}
   obstacleCount: 50
+  diceTopFaceChecker: {fileID: 919132149518328111}
+  randomThrow: {fileID: 919132149518328112}
+  stepsToMove: 0
 --- !u!114 &210078519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2767,13 +2768,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8164078558810806775}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.71085685, y: -0.0031816014, z: 0.00318276, w: 0.70332235}
   m_LocalPosition: {x: -0, y: -5.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450653236542356}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.799, y: 40.188004, z: -40.18799}
 --- !u!23 &1587545474226853650
 MeshRenderer:
   m_ObjectHideFlags: 0

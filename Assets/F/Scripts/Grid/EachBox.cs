@@ -34,7 +34,7 @@ public class EachBox : MonoBehaviour
         switch (randomEffect)
         {
             case 0:
-                gridBehavior.stepLeft += 6;  // Gain 6 more steps this round
+                gridBehavior.stepsToMove += 6;  // Gain 6 more steps this round
                 Debug.Log("Gained 6 more steps!");
                 break;
             case 1:

@@ -34,11 +34,5 @@ public class FDiceTopFaceChecker : MonoBehaviour
                 value = count;
             }
         }
-        /*
-        if (topFace != null)
-        {
-            Debug.Log("Top face is: " + value);
-        }
-        */
     }
 }

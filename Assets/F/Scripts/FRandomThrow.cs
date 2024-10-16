@@ -22,12 +22,12 @@ public class FRandomThrow : MonoBehaviour
         }
     }  
 
-    void ThrowObject()
+    public void ThrowObject()
     {
         float randomMagnitude = Random.Range(minForce, maxForce);
         transform.rotation = origin.transform.rotation;
         Vector3 force = randomMagnitude * (origin.transform.forward - origin.transform.right);
-        transform.position = origin.transform.position + origin.transform.forward * 5 + origin.transform.right * 15;
+        transform.position = origin.transform.position + origin.transform.right;
         rb.velocity = Vector3.zero;
         rb.AddForce(force, ForceMode.Impulse);
         transform.rotation = Quaternion.Euler(Random.Range(0, 360),Random.Range(0, 360),Random.Range(0, 360));
