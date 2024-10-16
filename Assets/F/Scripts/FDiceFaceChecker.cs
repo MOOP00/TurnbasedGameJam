@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FDiceFaceChecker : MonoBehaviour
 {
@@ -34,5 +34,21 @@ public class FDiceFaceChecker : MonoBehaviour
                 value = count;
             }
         }
+    }
+
+    // Method สำหรับการโยนลูกเต๋า
+    public void ThrowObject()
+    {
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody ไม่ถูกตั้งค่าใน FDiceFaceChecker");
+            return;
+        }
+
+        float randomForce = Random.Range(10f, 15f);
+        Vector3 throwDirection = new Vector3(Random.Range(-1f, 1f), 1, Random.Range(-1f, 1f));
+
+        rb.AddForce(throwDirection * randomForce, ForceMode.Impulse);
+        rb.AddTorque(Random.insideUnitSphere * randomForce, ForceMode.Impulse);
     }
 }

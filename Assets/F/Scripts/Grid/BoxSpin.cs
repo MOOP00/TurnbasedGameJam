@@ -20,7 +20,7 @@ public class BoxSpin : MonoBehaviour
         {
             // Rotate the object around its Y-axis (spins it in the air)
             transform.Rotate(Vector3.up * spinSpeed * Time.deltaTime);
-            transform.position = transform.position + Vector3.up*Time.deltaTime;
+            transform.position = transform.position + Vector3.up * Time.deltaTime;
         }
     }
 

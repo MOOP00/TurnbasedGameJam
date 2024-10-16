@@ -38,7 +38,7 @@ public class GridBehavior : MonoBehaviour
                 if (x == 0 || x == gridSize - 1 || z == 0 || z == gridSize - 1)
                 {
                     Vector3 perimeterPos = new Vector3(x, 0, z);
-                    
+
                     // Ensure no obstacles are placed on player starting positions
                     if (perimeterPos != player1Pos && perimeterPos != player2Pos)
                     {
@@ -52,8 +52,8 @@ public class GridBehavior : MonoBehaviour
     void Start()
     {
         // Initialize starting positions
-        player1Pos = new Vector3(2, 0, gridSize/2);  // Adjusted to be inside the perimeter
-        player2Pos = new Vector3(gridSize - 3, 0, gridSize/2);  // Adjusted to be inside the perimeter
+        player1Pos = new Vector3(2, 0, gridSize / 2);  // Adjusted to be inside the perimeter
+        player2Pos = new Vector3(gridSize - 3, 0, gridSize / 2);  // Adjusted to be inside the perimeter
 
         player1.transform.position = player1Pos;
         player2.transform.position = player2Pos;
@@ -110,18 +110,18 @@ public class GridBehavior : MonoBehaviour
         for (int i = 0; i < obstacleCount; i++)
         {
             Vector3 randomPos = new Vector3(
-                Random.Range(1, gridSize-1), 
-                0, 
-                Random.Range(1, gridSize-1)
+                Random.Range(1, gridSize - 1),
+                0,
+                Random.Range(1, gridSize - 1)
             );
 
             // Ensure obstacles do not spawn on player positions
             while (randomPos == player1Pos || randomPos == player2Pos)
             {
                 randomPos = new Vector3(
-                    Random.Range(1, gridSize-1), 
-                    0, 
-                    Random.Range(1, gridSize-1)
+                    Random.Range(1, gridSize - 1),
+                    0,
+                    Random.Range(1, gridSize - 1)
                 );
             }
 
@@ -152,13 +152,13 @@ public class GridBehavior : MonoBehaviour
             if (isPlayer1Turn)
             {
                 player1Pos = targetPos;
-                if(maxStep<=0)
+                if (maxStep <= 0)
                     player1Moved = true;
             }
             else
             {
                 player2Pos = targetPos;
-                if(maxStep<=0)
+                if (maxStep <= 0)
                     player2Moved = true;
             }
 
@@ -200,8 +200,9 @@ public class GridBehavior : MonoBehaviour
         if (!Physics.CheckSphere(targetPos, 0.2f, obstacleLayer))  // Smaller sphere check
         {
             return true;
-        }else
-        return false;
+        }
+        else
+            return false;
     }
 
     void EnterBattleScene()
