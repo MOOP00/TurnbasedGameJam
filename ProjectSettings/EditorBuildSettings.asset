@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/F/Scenes/abc.unity
     guid: dca237c91b7c4ea42a9395f99a906aed
+  - enabled: 1
+    path: Assets/Raman/scenes/Ending.unity
+    guid: 3b91cf16fb4a33c4b850e0fd0c22ba17
   m_configObjects: {}
