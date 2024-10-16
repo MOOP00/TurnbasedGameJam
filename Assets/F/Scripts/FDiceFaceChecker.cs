@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FDiceTopFaceChecker : MonoBehaviour
+public class FDiceFaceChecker : MonoBehaviour
 {
     public int value = 0;
     public Transform[] diceFaces;

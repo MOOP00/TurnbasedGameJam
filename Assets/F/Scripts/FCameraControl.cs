@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FCameraControl : MonoBehaviour
 {
-    public Transform target;   // The object the camera follows, rotates around, and zooms on
+    public Transform target1;   // The object the camera follows, rotates around, and zooms on
+    public Transform target2;
     public float zoomSpeed = 10f;  // Speed of zooming in/out
     public float followSpeed = 5f; // Speed of following the target
     public float rotationSpeed = 100f; // Speed of camera rotation
@@ -16,10 +17,12 @@ public class FCameraControl : MonoBehaviour
     private float yaw; // Horizontal angle (left/right rotation)
     private float pitch; // Vertical angle (up/down rotation)
 
+    public GridBehavior gb;
+
     void Start()
     {
         // Calculate the initial distance between the camera and the target
-        currentDistance = Vector3.Distance(transform.position, target.position);
+        currentDistance = Vector3.Distance(transform.position, target1.position);
 
         // Set initial yaw and pitch angles based on current camera rotation
         Vector3 angles = transform.eulerAngles;
@@ -49,12 +52,18 @@ public class FCameraControl : MonoBehaviour
         // Calculate the new position of the camera based on the yaw, pitch, and current zoom distance
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0); // Camera rotation
         Vector3 direction = rotation * Vector3.back; // Direction away from the target
-        Vector3 desiredPosition = target.position + direction * currentDistance;
-
+        Vector3 desiredPosition;
+        if(gb.isPlayer1Turn)
+            desiredPosition = target1.position + direction * currentDistance;
+        else
+            desiredPosition = target2.position + direction * currentDistance;
         // Smoothly update the camera's position to follow and rotate around the target
         transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
 
         // Make the camera look at the target
-        transform.LookAt(target);
+        if(gb.isPlayer1Turn)
+            transform.LookAt(target1);
+        else
+            transform.LookAt(target2);
     }
 }

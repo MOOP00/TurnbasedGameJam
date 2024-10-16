@@ -5,7 +5,7 @@ public class FDisplayNumber : MonoBehaviour
 {
     public TextMeshPro numberText;
     public GameObject num;
-    public FDiceTopFaceChecker dch;
+    public FDiceFaceChecker dch;
 
     void Update()
     {
