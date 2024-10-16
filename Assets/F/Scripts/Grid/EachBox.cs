@@ -66,31 +66,31 @@ public class EachBox : MonoBehaviour
         switch (randomEffect)
         {
             case 0:
-                gridBehavior.stepLeft += 6;  // เพิ่ม 6 step
+                gridBehavior.stepLeft += 6;  // Gain 6 more steps this round
                 break;
             case 1:
-                gridBehavior.stepLeft += 3;  // เพิ่ม 3 step
+                gridBehavior.stepLeft += 3;  // Gain 6 more steps this round
                 break;
             case 2:
-                gridBehavior.stepLeft += 9;  // เพิ่ม 9 step
+                gridBehavior.stepLeft += 9;  // Gain 6 more steps this round
                 break;
             case 3:
-                advantageSystem.ModifyReroll(isPlayer1, 1);  // เพิ่ม 1 reroll
+                advantageSystem.ModifyReroll(isPlayer1, 1);  // Gain +1 advantage
                 break;
             case 4:
-                advantageSystem.ModifyReroll(isPlayer1, 2);  // เพิ่ม 2 reroll
+                advantageSystem.ModifyReroll(isPlayer1, 2);  // Gain +2 advantage
                 break;
             case 5:
-                advantageSystem.ModifyHealth(isPlayer1, 5);  // เพิ่ม 5 health
+                advantageSystem.ModifyHealth(isPlayer1, 5);  // Gain -1 advantage
                 break;
             case 6:
-                advantageSystem.ModifyDice(isPlayer1, 1);  // เพิ่ม 1 dice
+                advantageSystem.ModifyDice(isPlayer1, 1);  // Gain +1 advantage
                 break;
             case 7:
-                advantageSystem.ModifyDice(isPlayer1, 2);  // เพิ่ม 2 dice
+                advantageSystem.ModifyDice(isPlayer1, 2);  // Gain +2 advantage
                 break;
             case 8:
-                advantageSystem.ModifyHealth(isPlayer1, 10);  // เพิ่ม 10 health
+                advantageSystem.ModifyHealth(isPlayer1, 10);  // Gain -1 advantage
                 break;
         }
     }
