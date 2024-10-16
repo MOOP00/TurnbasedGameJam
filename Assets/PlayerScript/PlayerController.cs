@@ -2,7 +2,7 @@
 
 public class PlayerController : MonoBehaviour
 {
-    public bool isTurnBasedMode = false; // ตัวแปรสำหรับการสลับโหมด Turn-Based
+    public bool isTurnBasedMode = false;
 
     private CharacterController controller;
     private float moveSpeed = 4f;
@@ -14,16 +14,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        // ป้องกันไม่ให้ PlayerController ถูกทำลายเมื่อเปลี่ยน Scene
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // ใช้ DontDestroyOnLoad สำหรับทั้ง Player 1 และ Player 2
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -33,7 +25,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // ผู้เล่นสามารถขยับได้เฉพาะเมื่อไม่อยู่ในโหมด Turn-Based
         if (!isTurnBasedMode)
         {
             Move();
@@ -42,10 +33,9 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");  // การเคลื่อนที่ซ้ายขวา
-        float vertical = Input.GetAxisRaw("Vertical");      // การเคลื่อนที่เดินหน้าถอยหลัง
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        // ไม่ต้องกลับทิศทางในแกน Z และแกน X
         Vector3 dir = new Vector3(horizontal, 0f, vertical).normalized;
         Vector3 velocity = moveSpeed * Time.deltaTime * dir;
 
@@ -57,16 +47,14 @@ public class PlayerController : MonoBehaviour
 
         if (dir.magnitude >= 0.1f)
         {
-            // หมุนตัวละครให้หันไปตามทิศทางการเดิน
             transform.rotation = Quaternion.LookRotation(dir);
             controller.Move(velocity);
         }
     }
 
-    // ฟังก์ชันที่จะถูกเรียกเมื่อเข้าสู่โหมด Turn-Based
     public void EnterTurnBasedMode()
     {
-        isTurnBasedMode = true; // ปิดการขยับของผู้เล่น
+        isTurnBasedMode = true;
         Debug.Log("Entering Turn-Based Mode");
     }
 }
