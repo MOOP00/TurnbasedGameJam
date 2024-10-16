@@ -14,7 +14,7 @@ public class AdvantageSystem : MonoBehaviour
     public TextMeshProUGUI text1;
     public TextMeshProUGUI text2;
 
-    void Start()
+    void Awake()
     {
         // โหลดค่าความเสียหายจาก PlayerPrefs เมื่อเริ่ม
         health1 = PlayerPrefs.GetInt("Player1Health", 100);
@@ -25,6 +25,14 @@ public class AdvantageSystem : MonoBehaviour
     void Update()
     {
         SetText();
+    }
+
+    // ฟังก์ชันรีเซ็ตสุขภาพให้เป็น 100
+    public void ResetHealth()
+    {
+        health1 = 100;  // Reset Player 1 health to 100
+        health2 = 100;  // Reset Player 2 health to 100
+        SetText();      // Update the UI
     }
 
     public void ModifyReroll(bool isPlayer1, int amount)
@@ -70,5 +78,12 @@ public class AdvantageSystem : MonoBehaviour
     {
         text1.text = $"Player 1\nHealth: {health1}";
         text2.text = $"Player 2\nHealth: {health2}";
+    }
+
+    // ใช้เพื่อรีเซ็ตสุขภาพเมื่อหยุดเล่น
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("Player1Health", 100); // บันทึกสุขภาพ Player 1 เป็น 100
+        PlayerPrefs.SetInt("Player2Health", 100); // บันทึกสุขภาพ Player 2 เป็น 100
     }
 }
