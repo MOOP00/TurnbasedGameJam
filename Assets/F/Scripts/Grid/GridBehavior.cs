@@ -207,6 +207,6 @@ public class GridBehavior : MonoBehaviour
     void EnterBattleScene()
     {
         Debug.Log("Players collided! Entering Battle Scene.");
-        SceneManager.LoadScene("BattleScene");  // Ensure you have a scene called "BattleScene"
+        SceneManager.LoadScene("abc");  // Ensure you have a scene called "BattleScene"
     }
 }
