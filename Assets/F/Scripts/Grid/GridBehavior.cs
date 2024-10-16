@@ -52,8 +52,8 @@ public class GridBehavior : MonoBehaviour
     void Start()
     {
         // Initialize starting positions
-        player1Pos = new Vector3(2, 0, 2);  // Adjusted to be inside the perimeter
-        player2Pos = new Vector3(gridSize - 3, 0, gridSize - 3);  // Adjusted to be inside the perimeter
+        player1Pos = new Vector3(2, 0, gridSize/2);  // Adjusted to be inside the perimeter
+        player2Pos = new Vector3(gridSize - 3, 0, gridSize/2);  // Adjusted to be inside the perimeter
 
         player1.transform.position = player1Pos;
         player2.transform.position = player2Pos;
