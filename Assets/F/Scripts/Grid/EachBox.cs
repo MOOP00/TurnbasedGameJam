@@ -17,7 +17,7 @@ public class EachBox : MonoBehaviour
         gridBehavior = GameObject.Find("GridManager").GetComponent<GridBehavior>();
         advantageSystem = GameObject.Find("GridManager").GetComponent<AdvantageSystem>();
         randomEffect = Random.Range(0, 9);
-        
+
         switch (randomEffect)
         {
             case 0:
@@ -36,7 +36,7 @@ public class EachBox : MonoBehaviour
                 _text.text = "+2 Reroll";
                 break;
             case 5:
-                _text.text = "-1 Reroll";
+                _text.text = "+5 Health";
                 break;
             case 6:
                 _text.text = "+1 Dice";
@@ -45,7 +45,7 @@ public class EachBox : MonoBehaviour
                 _text.text = "+2 Dice";
                 break;
             case 8:
-                _text.text = "-1 Dice";
+                _text.text = "+10 health";
                 break;
         }
     }
@@ -67,39 +67,30 @@ public class EachBox : MonoBehaviour
         {
             case 0:
                 gridBehavior.stepLeft += 6;  // Gain 6 more steps this round
-                Debug.Log("Gained 6 more steps!");
                 break;
             case 1:
                 gridBehavior.stepLeft += 3;  // Gain 6 more steps this round
-                Debug.Log("Gained 3 more steps!");
                 break;
             case 2:
                 gridBehavior.stepLeft += 9;  // Gain 6 more steps this round
-                Debug.Log("Gained 9 more steps!");
                 break;
             case 3:
                 advantageSystem.ModifyReroll(isPlayer1, 1);  // Gain +1 advantage
-                Debug.Log("Gained +1 reroll!");
                 break;
             case 4:
                 advantageSystem.ModifyReroll(isPlayer1, 2);  // Gain +2 advantage
-                Debug.Log("Gained +2 reroll!");
                 break;
             case 5:
-                advantageSystem.ModifyReroll(isPlayer1, -1);  // Gain -1 advantage
-                Debug.Log("Gained -1 reroll!");
+                advantageSystem.ModifyHealth(isPlayer1, 5);  // Gain -1 advantage
                 break;
             case 6:
                 advantageSystem.ModifyDice(isPlayer1, 1);  // Gain +1 advantage
-                Debug.Log("Gained +1 dice!");
                 break;
             case 7:
                 advantageSystem.ModifyDice(isPlayer1, 2);  // Gain +2 advantage
-                Debug.Log("Gained +2 dice!");
                 break;
             case 8:
-                advantageSystem.ModifyDice(isPlayer1, -1);  // Gain -1 advantage
-                Debug.Log("Gained -1 dice!");
+                advantageSystem.ModifyHealth(isPlayer1, 10);  // Gain -1 advantage
                 break;
         }
     }

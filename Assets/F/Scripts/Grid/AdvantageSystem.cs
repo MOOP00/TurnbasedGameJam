@@ -10,11 +10,16 @@ public class AdvantageSystem : MonoBehaviour
     public int player1Dice = 0;  // Reroll points for Player 1
     public int player2Dice = 0;
 
-    public int health1;
-    public int health2;
+    public int health1 = 100;
+    public int health2 = 100;
 
     public TextMeshProUGUI text1;
     public TextMeshProUGUI text2;
+
+    void Update()
+    {
+        SetText();
+    }
 
     public void ModifyReroll(bool isPlayer1, int amount)
     {
@@ -26,7 +31,6 @@ public class AdvantageSystem : MonoBehaviour
         {
             player2Reroll += amount;
         }
-        SetText();
     }
     public void ModifyDice(bool isPlayer1, int amount)
     {
@@ -38,7 +42,18 @@ public class AdvantageSystem : MonoBehaviour
         {
             player2Dice += amount;
         }
-        SetText();
+    }
+
+    public void ModifyHealth(bool isPlayer1, int amount)
+    {
+        if (isPlayer1)
+        {
+            health1 += amount;
+        }
+        else
+        {
+            health2 += amount;
+        }
     }
 
     // Call this to get Reroll points for the current player
@@ -54,7 +69,7 @@ public class AdvantageSystem : MonoBehaviour
 
     public void SetText()
     {
-        text1.text = "Player1\nRerolls: "+player1Reroll.ToString()+"\nDice: "+player1Dice.ToString();
-        text2.text = "Player1\nRerolls: "+player2Reroll.ToString()+"\nDice: "+player2Dice.ToString();
+        text1.text = "Player1\nHealth: "+health1.ToString();
+        text2.text = "Player1\nHealth: "+health2.ToString();
     }
 }
