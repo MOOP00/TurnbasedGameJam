@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
 public class GridBehavior : MonoBehaviour
 {
     public int gridSize = 10;  // Size of the grid (10x10x10 grid)
     public float moveSpeed = 0.2f;  // Speed of player movement
     public LayerMask obstacleLayer;  // Layer for obstacles
+    public int maxStep = 5;  // Maximum steps a player can take in a single turn
+    private int stepLeft;  // Steps left for the current player
 
     public Vector3 player1Pos;
     public Vector3 player2Pos;
@@ -34,6 +31,9 @@ public class GridBehavior : MonoBehaviour
         player2.transform.position = player2Pos;
 
         GenerateRandomObstacles();  // Generate obstacles randomly on the grid
+
+        // Set initial steps
+        stepLeft = maxStep;
     }
 
     void Update()
@@ -45,11 +45,9 @@ public class GridBehavior : MonoBehaviour
             {
                 Vector3 moveDirection = GetInputDirectionPlayer1();
 
-                if (moveDirection != Vector3.zero)
+                if (moveDirection != Vector3.zero && stepLeft > 0)
                 {
                     StartCoroutine(MovePlayer(player1, player1Pos, moveDirection));
-                    player1Moved = true;
-                    isPlayer1Turn = false;  // Switch to Player 2's turn
                 }
             }
             // Player 2 moves using Arrow Keys
@@ -57,11 +55,9 @@ public class GridBehavior : MonoBehaviour
             {
                 Vector3 moveDirection = GetInputDirectionPlayer2();
 
-                if (moveDirection != Vector3.zero)
+                if (moveDirection != Vector3.zero && stepLeft > 0)
                 {
                     StartCoroutine(MovePlayer(player2, player2Pos, moveDirection));
-                    player2Moved = true;
-                    isPlayer1Turn = true;  // Switch to Player 1's turn
                 }
             }
         }
@@ -122,10 +118,29 @@ public class GridBehavior : MonoBehaviour
                 player.transform.position = Vector3.Lerp(startPos, targetPos, t);
                 yield return null;
             }
-            if(isPlayer1Turn)
-                player2Pos = targetPos;
-            else
+
+            // Update player position and steps left
+            if (isPlayer1Turn)
+            {
                 player1Pos = targetPos;
+                player1Moved = true;
+            }
+            else
+            {
+                player2Pos = targetPos;
+                player2Moved = true;
+            }
+
+            // Decrement steps left
+            stepLeft--;
+
+            // If no steps left, switch turns
+            if (stepLeft <= 0)
+            {
+                isPlayer1Turn = !isPlayer1Turn;
+                stepLeft = maxStep;  // Reset steps for the next player
+            }
+
             playerPos = targetPos;
         }
         isMoving = false;

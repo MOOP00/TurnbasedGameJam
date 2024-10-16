@@ -223,14 +223,15 @@ MonoBehaviour:
   moveSpeed: 0.2
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
+  maxStep: 6
   player1Pos: {x: 0, y: 0, z: 0}
   player2Pos: {x: 0, y: 0, z: 0}
   player1: {fileID: 5745807960104226587}
   player2: {fileID: 2146793568}
   obstaclePrefab: {fileID: 2086883614102926991, guid: 2e56a109cf3290142aa4d5c8415b7bd5,
     type: 3}
-  obstacleCount: 5
+  obstacleCount: 10
 --- !u!1 &343824346
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,7 +2371,6 @@ GameObject:
   - component: {fileID: 2146793572}
   - component: {fileID: 2146793571}
   - component: {fileID: 2146793570}
-  - component: {fileID: 2146793569}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -2378,37 +2378,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2146793569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146793568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: dece5996a847c9b489a9f7ed157e2368,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!136 &2146793570
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2634,37 +2603,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2089153239016321177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745807960104226587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: dece5996a847c9b489a9f7ed157e2368,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!33 &2436495963089216569
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2724,7 +2662,6 @@ GameObject:
   - component: {fileID: 2436495963089216569}
   - component: {fileID: 6625386826822048006}
   - component: {fileID: 2876841617668191801}
-  - component: {fileID: 2089153239016321177}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
