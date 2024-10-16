@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Raman/scenes/Main Menu.unity
     guid: d8237e2a605942a409e6babcb3e684c3
   - enabled: 1
-    path: Assets/Raman/scenes/Test.unity
-    guid: ee0d6a2c1aa953d4d94182ee77ebd9d5
+    path: Assets/F/Scenes/MainScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/F/Scenes/abc.unity
+    guid: dca237c91b7c4ea42a9395f99a906aed
   m_configObjects: {}
