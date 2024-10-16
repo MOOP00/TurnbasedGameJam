@@ -21,18 +21,18 @@ public class MysteryBox : MonoBehaviour
         for (int i = 0; i < mysteryBoxCount; i++)
         {
             Vector3 randomPos = new Vector3(
-                Random.Range(0, gridBehavior.gridSize),
+                Random.Range(1, gridBehavior.gridSize-1),
                 0,
-                Random.Range(0, gridBehavior.gridSize)
+                Random.Range(1, gridBehavior.gridSize-1)
             );
 
             // Ensure mystery boxes do not spawn on player or obstacle positions
             while (randomPos == gridBehavior.player1Pos || randomPos == gridBehavior.player2Pos || Physics.CheckSphere(randomPos, 0.4f, obstacleLayer))
             {
                 randomPos = new Vector3(
-                    Random.Range(0, gridBehavior.gridSize),
+                    Random.Range(1, gridBehavior.gridSize-1),
                     0,
-                    Random.Range(0, gridBehavior.gridSize)
+                    Random.Range(1, gridBehavior.gridSize-1)
                 );
             }
 

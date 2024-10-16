@@ -20,27 +20,49 @@ public class GridBehavior : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
     public GameObject obstaclePrefab;
+    public GameObject _ref;
 
     public int obstacleCount = 10;  // Number of obstacles in the grid
 
     private bool player1Moved = false;
     private bool player2Moved = false;
 
+    void GeneratePerimeterObstacles()
+    {
+        // Place obstacles along the outer boundary (perimeter) of the grid
+        for (int x = 0; x < gridSize; x++)
+        {
+            for (int z = 0; z < gridSize; z++)
+            {
+                // Place obstacles at the edges (perimeter) of the grid
+                if (x == 0 || x == gridSize - 1 || z == 0 || z == gridSize - 1)
+                {
+                    Vector3 perimeterPos = new Vector3(x, 0, z);
+                    
+                    // Ensure no obstacles are placed on player starting positions
+                    if (perimeterPos != player1Pos && perimeterPos != player2Pos)
+                    {
+                        Instantiate(obstaclePrefab, perimeterPos, Quaternion.identity);
+                    }
+                }
+            }
+        }
+    }
+
     void Start()
     {
         // Initialize starting positions
-        player1Pos = new Vector3(0, 0, 0);
-        player2Pos = new Vector3(gridSize - 1, 0, gridSize - 1);
+        player1Pos = new Vector3(2, 0, 2);  // Adjusted to be inside the perimeter
+        player2Pos = new Vector3(gridSize - 3, 0, gridSize - 3);  // Adjusted to be inside the perimeter
 
         player1.transform.position = player1Pos;
         player2.transform.position = player2Pos;
 
-        GenerateRandomObstacles();  // Generate obstacles randomly on the grid
-
+        GeneratePerimeterObstacles();  // Generate obstacles around the perimeter
+        GenerateRandomObstacles();
         // Set initial steps
         stepLeft = maxStep;
     }
-
     void Update()
     {
         if (!isMoving)
@@ -86,7 +108,7 @@ public class GridBehavior : MonoBehaviour
         for (int i = 0; i < obstacleCount; i++)
         {
             Vector3 randomPos = new Vector3(
-                Random.Range(0, gridSize), 
+                Random.Range(0, gridSize),
                 0, 
                 Random.Range(0, gridSize)
             );
@@ -155,33 +177,28 @@ public class GridBehavior : MonoBehaviour
 
     Vector3 GetInputDirectionPlayer1()
     {
-        if (Input.GetKeyDown(KeyCode.W)) return Vector3.forward;  // Move up
-        if (Input.GetKeyDown(KeyCode.S)) return Vector3.back;     // Move down
-        if (Input.GetKeyDown(KeyCode.A)) return Vector3.left;     // Move left
-        if (Input.GetKeyDown(KeyCode.D)) return Vector3.right;    // Move right
+        if (Input.GetKeyDown(KeyCode.W)) return (_ref.transform.forward);  // Move up
+        if (Input.GetKeyDown(KeyCode.S)) return (-_ref.transform.forward);     // Move down
+        if (Input.GetKeyDown(KeyCode.A)) return (-_ref.transform.right);     // Move left
+        if (Input.GetKeyDown(KeyCode.D)) return (_ref.transform.right);    // Move right
         return Vector3.zero;
     }
 
     Vector3 GetInputDirectionPlayer2()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) return Vector3.forward;    // Move up
-        if (Input.GetKeyDown(KeyCode.DownArrow)) return Vector3.back;     // Move down
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) return Vector3.left;     // Move left
-        if (Input.GetKeyDown(KeyCode.RightArrow)) return Vector3.right;   // Move right
+        if (Input.GetKeyDown(KeyCode.UpArrow)) return (_ref.transform.forward);    // Move up
+        if (Input.GetKeyDown(KeyCode.DownArrow)) return (-_ref.transform.forward);     // Move down
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) return (-_ref.transform.right);     // Move left
+        if (Input.GetKeyDown(KeyCode.RightArrow)) return (_ref.transform.right);   // Move right
         return Vector3.zero;
     }
 
     bool IsValidMove(Vector3 targetPos)
     {
-        // Check if the target position is within grid bounds and not blocked by an obstacle
-        if (targetPos.x >= 0 && targetPos.x < gridSize && targetPos.z >= 0 && targetPos.z < gridSize)
+        if (!Physics.CheckSphere(targetPos, 0.2f, obstacleLayer))  // Smaller sphere check
         {
-            // Ensure the target position is not occupied by an obstacle
-            if (!Physics.CheckSphere(targetPos, 0.4f, obstacleLayer))
-            {
-                return true;
-            }
-        }
+            return true;
+        }else
         return false;
     }
 

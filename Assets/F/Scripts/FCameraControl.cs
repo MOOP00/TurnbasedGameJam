@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZoomFollowAndRotate : MonoBehaviour
+public class FCameraControl : MonoBehaviour
 {
     public Transform target;   // The object the camera follows, rotates around, and zooms on
     public float zoomSpeed = 10f;  // Speed of zooming in/out
