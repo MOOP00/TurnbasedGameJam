@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -66,31 +66,31 @@ public class EachBox : MonoBehaviour
         switch (randomEffect)
         {
             case 0:
-                gridBehavior.stepLeft += 6;  // Gain 6 more steps this round
+                gridBehavior.stepLeft += 6;  // เพิ่ม 6 step
                 break;
             case 1:
-                gridBehavior.stepLeft += 3;  // Gain 6 more steps this round
+                gridBehavior.stepLeft += 3;  // เพิ่ม 3 step
                 break;
             case 2:
-                gridBehavior.stepLeft += 9;  // Gain 6 more steps this round
+                gridBehavior.stepLeft += 9;  // เพิ่ม 9 step
                 break;
             case 3:
-                advantageSystem.ModifyReroll(isPlayer1, 1);  // Gain +1 advantage
+                advantageSystem.ModifyReroll(isPlayer1, 1);  // เพิ่ม 1 reroll
                 break;
             case 4:
-                advantageSystem.ModifyReroll(isPlayer1, 2);  // Gain +2 advantage
+                advantageSystem.ModifyReroll(isPlayer1, 2);  // เพิ่ม 2 reroll
                 break;
             case 5:
-                advantageSystem.ModifyHealth(isPlayer1, 5);  // Gain -1 advantage
+                advantageSystem.ModifyHealth(isPlayer1, 5);  // เพิ่ม 5 health
                 break;
             case 6:
-                advantageSystem.ModifyDice(isPlayer1, 1);  // Gain +1 advantage
+                advantageSystem.ModifyDice(isPlayer1, 1);  // เพิ่ม 1 dice
                 break;
             case 7:
-                advantageSystem.ModifyDice(isPlayer1, 2);  // Gain +2 advantage
+                advantageSystem.ModifyDice(isPlayer1, 2);  // เพิ่ม 2 dice
                 break;
             case 8:
-                advantageSystem.ModifyHealth(isPlayer1, 10);  // Gain -1 advantage
+                advantageSystem.ModifyHealth(isPlayer1, 10);  // เพิ่ม 10 health
                 break;
         }
     }

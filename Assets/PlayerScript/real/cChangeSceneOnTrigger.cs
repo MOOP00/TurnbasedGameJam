@@ -14,7 +14,6 @@ public class cChangeSceneOnTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // เรียกฟังก์ชันการเปลี่ยนฉากพร้อมเอฟเฟกต์วาร์ปและซีดจาง
             sceneTransition.ChangeSceneWithWarp(sceneToLoad);
         }
     }
