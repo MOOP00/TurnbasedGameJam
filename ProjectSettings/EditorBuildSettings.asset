@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Raman/scenes/Cutscene.unity
     guid: 6fd3ad92ff57b0b4f9fdad78a21897b6
   - enabled: 1
-    path: Assets/F/Scenes/MainScene.unity
+    path: Assets/Raman/scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/F/Scenes/abc.unity
+    path: Assets/Raman/scenes/abc.unity
     guid: dca237c91b7c4ea42a9395f99a906aed
   - enabled: 1
     path: Assets/Raman/scenes/Ending.unity
