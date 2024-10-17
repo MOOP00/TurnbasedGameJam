@@ -3,33 +3,29 @@ using UnityEngine;
 
 public class AdvantageSystem : MonoBehaviour
 {
-    public static int Attack1 = 10;  // Reroll points for Player 1
-    public static int Attack2 = 10;  // Reroll points for Player 2
+    public static int Attack1 = 10;  // Attack points for Player 1
+    public static int Attack2 = 10;  // Attack points for Player 2
 
-    public static int health1 = 100; // Health for Player 1
-    public static int health2 = 100; // Health for Player 2
+    public static int health1 = 15; // Health for Player 1
+    public static int health2 = 15; // Health for Player 2
 
     public TextMeshProUGUI text1;
     public TextMeshProUGUI text2;
 
     void Awake()
     {
-        // โหลดค่าความเสียหายจาก PlayerPrefs เมื่อเริ่ม
-        //health1 = PlayerPrefs.GetInt("Player1Health", 100);
-        //health2 = PlayerPrefs.GetInt("Player2Health", 100);
-        SetText();
+        SetText(); // Update the health text initially
     }
 
     void Update()
     {
-        SetText();
+        SetText(); // Update the health text continuously
     }
 
-    // ฟังก์ชันรีเซ็ตสุขภาพให้เป็น 100
     public void ResetHealth()
     {
-        health1 = 100;  // Reset Player 1 health to 100
-        health2 = 100;  // Reset Player 2 health to 100
+        health1 = 15;  // Reset Player 1 health to 15
+        health2 = 15;  // Reset Player 2 health to 15
         SetText();      // Update the UI
     }
 
@@ -56,8 +52,7 @@ public class AdvantageSystem : MonoBehaviour
             health2 += amount;
         }
 
-        // Update the UI text to reflect the change
-        SetText();
+        SetText(); // Update the UI text to reflect the change
     }
 
     public void SetText()
@@ -66,10 +61,9 @@ public class AdvantageSystem : MonoBehaviour
         text2.text = $"Player 2\nHealth: {health2}\nAttack: {Attack2}";
     }
 
-    // ใช้เพื่อรีเซ็ตสุขภาพเมื่อหยุดเล่น
     private void OnApplicationQuit()
     {
-        PlayerPrefs.SetInt("Player1Health", 100); // บันทึกสุขภาพ Player 1 เป็น 100
-        PlayerPrefs.SetInt("Player2Health", 100); // บันทึกสุขภาพ Player 2 เป็น 100
+        PlayerPrefs.SetInt("Player1Health", 15); // Save Player 1 health to 15
+        PlayerPrefs.SetInt("Player2Health", 15); // Save Player 2 health to 15
     }
 }
