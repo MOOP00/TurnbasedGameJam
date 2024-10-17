@@ -10,8 +10,8 @@ public class FCameraControl : MonoBehaviour
     public float zoomSpeed = 10f;
     public float followSpeed = 5f;
     public float rotationSpeed = 100f;
-    public float minDistance = 5f;
-    public float maxDistance = 50f;
+    public float minDistance = 0.5f;
+    public float maxDistance = 8f;
     public float scrollSensitivity = 1f;
 
     private float currentDistance;
