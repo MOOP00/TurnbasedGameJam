@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class AdvantageSystem : MonoBehaviour
 {
-    public static int Attack1 = 0;  // Reroll points for Player 1
-    public static int Attack2 = 0;  // Reroll points for Player 2
+    public static int Attack1 = 10;  // Reroll points for Player 1
+    public static int Attack2 = 10;  // Reroll points for Player 2
 
     public static int health1 = 100; // Health for Player 1
     public static int health2 = 100; // Health for Player 2

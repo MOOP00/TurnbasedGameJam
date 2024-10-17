@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GridBehavior : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GridBehavior : MonoBehaviour
     public Vector3 player1Pos;
     public Vector3 player2Pos;
 
+    public static int round = 0;
     public bool isPlayer1Turn = true;  // Alternating turns
     private bool isMoving = false;
 
@@ -26,6 +28,8 @@ public class GridBehavior : MonoBehaviour
 
     private bool player1Moved = false;
     private bool player2Moved = false;
+
+    public TextMeshProUGUI stepText;
 
     void GeneratePerimeterObstacles()
     {
@@ -51,6 +55,9 @@ public class GridBehavior : MonoBehaviour
 
     void Start()
     {
+        round++;
+        if(round%2 == 0)
+            isPlayer1Turn = false;
         // Initialize starting positions
         player1Pos = new Vector3(2, 0, gridSize / 2);  // Adjusted to be inside the perimeter
         player2Pos = new Vector3(gridSize - 3, 0, gridSize / 2);  // Adjusted to be inside the perimeter
@@ -67,6 +74,8 @@ public class GridBehavior : MonoBehaviour
 
     void Update()
     {
+        stepText.text = stepLeft.ToString();
+
         if (!isMoving)
         {
             // Player 1 moves using WASD

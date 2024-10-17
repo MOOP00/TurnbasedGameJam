@@ -70,6 +70,13 @@ public class FCameraControl : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
         transform.LookAt(actualTarget);
 
+        StartCoroutine(FadeTextInAndOut());
+    }
+
+    public IEnumerator FadeTextInAndOut()
+    {
+        yield return StartCoroutine(FadeInText());
+        yield return new WaitForSeconds(1f);
         if (gb.isPlayer1Turn)
         {
             actualTarget = target1;
@@ -80,19 +87,18 @@ public class FCameraControl : MonoBehaviour
         }
 
         if(old != gb.isPlayer1Turn)
+        {
             if(gb.isPlayer1Turn)
-                mainText.text = "Player1's Turn";
+            {
+                mainText.text = "Player1";
+            }
             else
-                mainText.text = "Player2's Turn";
-        StartCoroutine(FadeTextInAndOut());
-
+            {
+                mainText.text = "Player2";
+            }
+        }
         old = gb.isPlayer1Turn;
-    }
-
-    public IEnumerator FadeTextInAndOut()
-    {
-        yield return StartCoroutine(FadeInText());
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         yield return StartCoroutine(FadeOutText());
     }
 
