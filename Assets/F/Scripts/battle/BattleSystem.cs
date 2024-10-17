@@ -24,8 +24,19 @@ public class BattleSystem : MonoBehaviour
 
     void Start()
     {
-        mainModule = GetComponent<ParticleSystem>().main;
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        {
+            // Initialization of components
+            audioManager = GameObject.FindGameObjectWithTag("Audio")?.GetComponent<AudioManager>();
+            if (audioManager == null)
+            {
+                Debug.LogWarning("AudioManager not found!");
+            }
+
+            if (player1Dice == null || player2Dice == null)
+            {
+                Debug.LogError("Dice references are not assigned in the inspector!");
+            }
+        }
     }
 
     void Update()
@@ -40,8 +51,11 @@ public class BattleSystem : MonoBehaviour
 
     private void PlayParticlesOnce(ParticleSystem ps)
     {
-        ps.Play(); // Play the particle system
-        hasPlayed = true; // Mark as played
+        if (ps != null && !hasPlayed)
+        {
+            ps.Play();
+            hasPlayed = true;
+        }
     }
 
     private IEnumerator ExecuteBattle()
