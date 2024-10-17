@@ -11,40 +11,15 @@ public class BattleSystem : MonoBehaviour
     public TextMeshProUGUI player2RollText;
     public TextMeshProUGUI battleResultText;
     public string returnSceneName;
-    public float battleDuration = 3f; // เวลาต่อสู้
-    public float delayBeforeResult = 2f; // เวลาก่อนแสดงผลลัพธ์
-    public float delayBeforeReturn = 2f; // เวลาก่อนวาปกลับ
+    public float battleDuration = 3f; // Duration of the battle
+    public float delayBeforeResult = 2f; // Delay before showing the result
+    public float delayBeforeReturn = 2f; // Delay before returning to the previous scene
 
-    public ParticleSystem particleSystem1;
-    public ParticleSystem particleSystem2;
-    private ParticleSystem.MainModule mainModule;
-    private bool battleStarted = false; // ตัวแปรบอกสถานะการเริ่มการต่อสู้
-    private bool hasPlayed = false;
-    AudioManager audioManager;
-
-    public Animator player1Animator; // Animator for Player 1
-    public Animator player2Animator; // Animator for Player 2
-
-    void Start()
-    {
-        {
-            // Initialization of components
-            audioManager = GameObject.FindGameObjectWithTag("Audio")?.GetComponent<AudioManager>();
-            if (audioManager == null)
-            {
-                Debug.LogWarning("AudioManager not found!");
-            }
-
-            if (player1Dice == null || player2Dice == null)
-            {
-                Debug.LogError("Dice references are not assigned in the inspector!");
-            }
-        }
-    }
+    private bool battleStarted = false; // Variable to check if the battle has started
 
     void Update()
     {
-        // ตรวจสอบว่ากด Space bar หรือยัง
+        // Check if the space bar has been pressed
         if (!battleStarted && Input.GetKeyDown(KeyCode.Space))
         {
             battleStarted = true;
@@ -52,66 +27,62 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    private void PlayParticlesOnce(ParticleSystem ps)
-    {
-        if (ps != null && !hasPlayed)
-        {
-            ps.Play();
-            hasPlayed = true;
-        }
-    }
-
     private IEnumerator ExecuteBattle()
     {
-        // ให้ลูกเต๋าแต่ละลูกถูกโยน
+        // Roll the dice for each player
         player1Dice.ThrowObject();
         player2Dice.ThrowObject();
 
-        // รอจนกว่าลูกเต๋าจะหยุดหมุน
+        // Wait until the dice have stopped rolling
         yield return new WaitForSeconds(battleDuration);
 
-        // ดึงค่าที่ผู้เล่น 1 และ 2 ทอยได้
+        // Get the values rolled by Player 1 and Player 2
         int player1Roll = player1Dice.value;
         int player2Roll = player2Dice.value;
 
-        // แสดงผลลัพธ์การทอยลูกเต๋า
+        // Display the results of the rolls
         player1RollText.text = "Player 1 Roll: " + player1Roll;
         player2RollText.text = "Player 2 Roll: " + player2Roll;
 
-        // รอเวลาเล็กน้อยก่อนคำนวณผลการต่อสู้
+        // Wait a moment before calculating the battle result
         yield return new WaitForSeconds(delayBeforeResult);
 
-        // แสดงผลลัพธ์การต่อสู้
+        // Determine the outcome of the battle
         if (player1Roll > player2Roll)
         {
-            advantageSystem.ModifyHealth(false, -AdvantageSystem.Attack1);
+            advantageSystem.ModifyHealth(false, -AdvantageSystem.Attack1); // Deal damage to Player 2
             battleResultText.text = "Player 1 wins the round!";
-            AdvantageSystem.Attack1 = 0;
-            AdvantageSystem.Attack2 = 0;
-            PlayParticlesOnce(particleSystem1);
-            audioManager.PlaySFX(audioManager.slash);
-            player1Animator.SetTrigger("Attack");
-
         }
         else if (player2Roll > player1Roll)
         {
-            advantageSystem.ModifyHealth(true, -AdvantageSystem.Attack2);
+            advantageSystem.ModifyHealth(true, -AdvantageSystem.Attack2); // Deal damage to Player 1
             battleResultText.text = "Player 2 wins the round!";
-            AdvantageSystem.Attack1 = 0;
-            AdvantageSystem.Attack2 = 0;
-            PlayParticlesOnce(particleSystem2);
-            audioManager.PlaySFX(audioManager.magic);
-            player2Animator.SetTrigger("Attack");
         }
         else
         {
             battleResultText.text = "It's a draw!";
         }
 
-        // รอเวลาก่อนวาปกลับไปยัง Scene แรก
-        yield return new WaitForSeconds(delayBeforeReturn);
-        PlayerPrefs.SetInt("Player1Health", AdvantageSystem.health1); // บันทึกสุขภาพของ Player 1
-        PlayerPrefs.SetInt("Player2Health", AdvantageSystem.health2); // บันทึกสุขภาพของ Player 2
-        UnityEngine.SceneManagement.SceneManager.LoadScene(returnSceneName);
+        // Check if either player's health is 0 or less to transition to the ending scene
+        if (AdvantageSystem.health1 <= 0 || AdvantageSystem.health2 <= 0)
+        {
+            // Start the ending scene transition
+            yield return StartCoroutine(SceneTransitionToEnding());
+        }
+        else
+        {
+            // Wait before returning to the previous scene
+            yield return new WaitForSeconds(delayBeforeReturn);
+            PlayerPrefs.SetInt("Player1Health", AdvantageSystem.health1); // Save Player 1 health
+            PlayerPrefs.SetInt("Player2Health", AdvantageSystem.health2); // Save Player 2 health
+            UnityEngine.SceneManagement.SceneManager.LoadScene(returnSceneName); // Return to the previous scene
+        }
+    }
+
+    private IEnumerator SceneTransitionToEnding()
+    {
+        // This is where you would implement the transition effect before going to the ending scene
+        yield return new WaitForSeconds(1f); // Simulate waiting for an effect (optional)
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Ending"); // Load the ending scene
     }
 }
