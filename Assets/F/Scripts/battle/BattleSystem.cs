@@ -22,6 +22,9 @@ public class BattleSystem : MonoBehaviour
     private bool hasPlayed = false;
     AudioManager audioManager;
 
+    public Animator player1Animator; // Animator for Player 1
+    public Animator player2Animator; // Animator for Player 2
+
     void Start()
     {
         {
@@ -87,6 +90,7 @@ public class BattleSystem : MonoBehaviour
             AdvantageSystem.Attack2 = 0;
             PlayParticlesOnce(particleSystem1);
             audioManager.PlaySFX(audioManager.slash);
+            player1Animator.SetTrigger("Attack");
 
         }
         else if (player2Roll > player1Roll)
@@ -97,6 +101,7 @@ public class BattleSystem : MonoBehaviour
             AdvantageSystem.Attack2 = 0;
             PlayParticlesOnce(particleSystem2);
             audioManager.PlaySFX(audioManager.magic);
+            player2Animator.SetTrigger("Attack");
         }
         else
         {
