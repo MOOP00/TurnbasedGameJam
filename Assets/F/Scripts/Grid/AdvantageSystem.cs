@@ -6,8 +6,8 @@ public class AdvantageSystem : MonoBehaviour
     public static int Attack1 = 10;  // Attack points for Player 1
     public static int Attack2 = 10;  // Attack points for Player 2
 
-    public static int health1 = 15; // Health for Player 1
-    public static int health2 = 15; // Health for Player 2
+    public static int health1 = 100; // Health for Player 1
+    public static int health2 = 100; // Health for Player 2
 
     public TextMeshProUGUI text1;
     public TextMeshProUGUI text2;
@@ -24,8 +24,8 @@ public class AdvantageSystem : MonoBehaviour
 
     public void ResetHealth()
     {
-        health1 = 15;  // Reset Player 1 health to 15
-        health2 = 15;  // Reset Player 2 health to 15
+        health1 = 100;  // Reset Player 1 health to 15
+        health2 = 100;  // Reset Player 2 health to 15
         SetText();      // Update the UI
     }
 

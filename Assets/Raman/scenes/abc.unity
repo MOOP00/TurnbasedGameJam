@@ -4976,6 +4976,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1287201780}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1287201783 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8523185218658421980, guid: eeb71ee44af9e2745881dd0a830cc64d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1287201780}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1288745625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5948,6 +5954,10 @@ MonoBehaviour:
   battleDuration: 3
   delayBeforeResult: 3
   delayBeforeReturn: 2
+  particleSystem1: {fileID: 1287201783}
+  particleSystem2: {fileID: 2022654551}
+  player1Animator: {fileID: 2091768304}
+  player2Animator: {fileID: 1279150671}
 --- !u!4 &1466231625
 Transform:
   m_ObjectHideFlags: 0
@@ -14236,6 +14246,12 @@ PrefabInstance:
 --- !u!4 &2022654549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7097291737126618379, guid: cd3f58aaea055ae44aa58659368409e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2022654548}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2022654551 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2926623944540549439, guid: cd3f58aaea055ae44aa58659368409e2,
     type: 3}
   m_PrefabInstance: {fileID: 2022654548}
   m_PrefabAsset: {fileID: 0}

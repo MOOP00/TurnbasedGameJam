@@ -11,15 +11,43 @@ public class BattleSystem : MonoBehaviour
     public TextMeshProUGUI player2RollText;
     public TextMeshProUGUI battleResultText;
     public string returnSceneName;
-    public float battleDuration = 3f; // Duration of the battle
-    public float delayBeforeResult = 2f; // Delay before showing the result
-    public float delayBeforeReturn = 2f; // Delay before returning to the previous scene
+    public float battleDuration = 3f; // เวลาต่อสู้
+    public float delayBeforeResult = 2f; // เวลาก่อนแสดงผลลัพธ์
+    public float delayBeforeReturn = 2f; // เวลาก่อนวาปกลับ
 
-    private bool battleStarted = false; // Variable to check if the battle has started
+    public ParticleSystem particleSystem1;
+    public ParticleSystem particleSystem2;
+    private ParticleSystem.MainModule mainModule;
+    private bool battleStarted = false; // ตัวแปรบอกสถานะการเริ่มการต่อสู้
+    private bool hasPlayed = false;
+    private AudioManager audioManager;
+
+    public Animator player1Animator; // Animator for Player 1
+    public Animator player2Animator; // Animator for Player 2
+
+    void Start()
+    {
+        // Initialization of components
+        audioManager = GameObject.FindGameObjectWithTag("Audio")?.GetComponent<AudioManager>();
+        if (audioManager == null)
+        {
+            Debug.LogWarning("AudioManager not found!");
+        }
+
+        if (player1Dice == null || player2Dice == null)
+        {
+            Debug.LogError("Dice references are not assigned in the inspector!");
+        }
+
+        if (player1Animator == null || player2Animator == null)
+        {
+            Debug.LogError("Animator references are not assigned in the inspector!");
+        }
+    }
 
     void Update()
     {
-        // Check if the space bar has been pressed
+        // ตรวจสอบว่ากด Space bar หรือยัง
         if (!battleStarted && Input.GetKeyDown(KeyCode.Space))
         {
             battleStarted = true;
@@ -27,43 +55,62 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    private void PlayParticlesOnce(ParticleSystem ps)
+    {
+        if (ps != null && !hasPlayed)
+        {
+            ps.Play();
+            hasPlayed = true;
+        }
+    }
+
     private IEnumerator ExecuteBattle()
     {
-        // Roll the dice for each player
+        // ให้ลูกเต๋าแต่ละลูกถูกโยน
         player1Dice.ThrowObject();
         player2Dice.ThrowObject();
 
-        // Wait until the dice have stopped rolling
+        // รอจนกว่าลูกเต๋าจะหยุดหมุน
         yield return new WaitForSeconds(battleDuration);
 
-        // Get the values rolled by Player 1 and Player 2
+        // ดึงค่าที่ผู้เล่น 1 และ 2 ทอยได้
         int player1Roll = player1Dice.value;
         int player2Roll = player2Dice.value;
 
-        // Display the results of the rolls
+        // แสดงผลลัพธ์การทอยลูกเต๋า
         player1RollText.text = "Player 1 Roll: " + player1Roll;
         player2RollText.text = "Player 2 Roll: " + player2Roll;
 
-        // Wait a moment before calculating the battle result
+        // รอเวลาเล็กน้อยก่อนคำนวณผลการต่อสู้
         yield return new WaitForSeconds(delayBeforeResult);
 
-        // Determine the outcome of the battle
+        // แสดงผลลัพธ์การต่อสู้
         if (player1Roll > player2Roll)
         {
-            advantageSystem.ModifyHealth(false, -AdvantageSystem.Attack1); // Deal damage to Player 2
+            advantageSystem.ModifyHealth(false, -AdvantageSystem.Attack1);
             battleResultText.text = "Player 1 wins the round!";
+            AdvantageSystem.Attack1 = 0;
+            AdvantageSystem.Attack2 = 0;
+            PlayParticlesOnce(particleSystem1);
+            player1Animator.SetTrigger("Attack"); // Trigger Player 1's attack animation
+            audioManager.PlaySFX(audioManager.slash);
         }
         else if (player2Roll > player1Roll)
         {
-            advantageSystem.ModifyHealth(true, -AdvantageSystem.Attack2); // Deal damage to Player 1
+            advantageSystem.ModifyHealth(true, -AdvantageSystem.Attack2);
             battleResultText.text = "Player 2 wins the round!";
+            AdvantageSystem.Attack1 = 0;
+            AdvantageSystem.Attack2 = 0;
+            PlayParticlesOnce(particleSystem2);
+            player2Animator.SetTrigger("Attack"); // Trigger Player 2's attack animation
+            audioManager.PlaySFX(audioManager.magic);
         }
         else
         {
             battleResultText.text = "It's a draw!";
         }
 
-        // Check if either player's health is 0 or less to transition to the ending scene
+        // รอเวลาก่อนวาปกลับไปยัง Scene แรก
         if (AdvantageSystem.health1 <= 0 || AdvantageSystem.health2 <= 0)
         {
             // Start the ending scene transition
