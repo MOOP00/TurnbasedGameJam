@@ -113,13 +113,13 @@ public class GridBehavior : MonoBehaviour
             EnterBattleScene();
         }
 
-        if(Input.GetKeyDown(KeyCode.G))
+        /*if(Input.GetKeyDown(KeyCode.G))
         {
             AdvantageSystem.health1 = 1;
             AdvantageSystem.health2 = 1;
             maxStep = 100;
             stepLeft = 100;
-        }
+        }*/
     }
 
     void GenerateRandomObstacles()
