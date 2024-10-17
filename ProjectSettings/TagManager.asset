@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - point
+  - Audio
   layers:
   - Default
   - TransparentFX
