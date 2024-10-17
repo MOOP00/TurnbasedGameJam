@@ -7,10 +7,11 @@ public class FRandomThrow : MonoBehaviour
     public GameObject origin;  // จุดที่ลูกเต๋าจะถูกโยนออกมา
 
     private Rigidbody rb;
-
+    AudioManager audioManager;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         if (rb == null)
         {
             Debug.LogError("Rigidbody is not assigned on the dice!");
@@ -29,6 +30,7 @@ public class FRandomThrow : MonoBehaviour
         {
             Debug.Log("Spacebar Pressed!");
             ThrowObject();
+            audioManager.PlaySFX(audioManager.dice);
         }
     }
 

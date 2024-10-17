@@ -2923,7 +2923,7 @@ GameObject:
   - component: {fileID: 1463672470}
   - component: {fileID: 1463672469}
   m_Layer: 0
-  m_Name: SFX Manager
+  m_Name: AudioManager
   m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

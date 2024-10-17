@@ -20,10 +20,12 @@ public class BattleSystem : MonoBehaviour
     private ParticleSystem.MainModule mainModule;
     private bool battleStarted = false; // ตัวแปรบอกสถานะการเริ่มการต่อสู้
     private bool hasPlayed = false;
+    AudioManager audioManager;
 
     void Start()
     {
         mainModule = GetComponent<ParticleSystem>().main;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -70,6 +72,8 @@ public class BattleSystem : MonoBehaviour
             AdvantageSystem.Attack1 = 0;
             AdvantageSystem.Attack2 = 0;
             PlayParticlesOnce(particleSystem1);
+            audioManager.PlaySFX(audioManager.slash);
+
         }
         else if (player2Roll > player1Roll)
         {
@@ -78,6 +82,7 @@ public class BattleSystem : MonoBehaviour
             AdvantageSystem.Attack1 = 0;
             AdvantageSystem.Attack2 = 0;
             PlayParticlesOnce(particleSystem2);
+            audioManager.PlaySFX(audioManager.magic);
         }
         else
         {
