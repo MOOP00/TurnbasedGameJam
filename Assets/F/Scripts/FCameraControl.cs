@@ -25,6 +25,8 @@ public class FCameraControl : MonoBehaviour
 
     public float fadeDuration = 1f;
 
+    private bool old = true;
+
     void Start()
     {
         currentDistance = Vector3.Distance(transform.position, target1.position);
@@ -38,6 +40,7 @@ public class FCameraControl : MonoBehaviour
         {
             Debug.LogError("GridBehavior is not assigned!");
         }
+        actualTarget = target1;
     }
 
     void Update()
@@ -75,6 +78,15 @@ public class FCameraControl : MonoBehaviour
         {
             actualTarget = target2;
         }
+
+        if(old != gb.isPlayer1Turn)
+            if(gb.isPlayer1Turn)
+                mainText.text = "Player1's Turn";
+            else
+                mainText.text = "Player2's Turn";
+        StartCoroutine(FadeTextInAndOut());
+
+        old = gb.isPlayer1Turn;
     }
 
     public IEnumerator FadeTextInAndOut()

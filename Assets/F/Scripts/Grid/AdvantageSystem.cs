@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class AdvantageSystem : MonoBehaviour
 {
-    public int player1Reroll = 0;  // Reroll points for Player 1
-    public int player2Reroll = 0;  // Reroll points for Player 2
-    public int player1Dice = 0;  // Dice points for Player 1
-    public int player2Dice = 0;  // Dice points for Player 2
+    public static int Attack1 = 0;  // Reroll points for Player 1
+    public static int Attack2 = 0;  // Reroll points for Player 2
 
-    public int health1 = 100; // Health for Player 1
-    public int health2 = 100; // Health for Player 2
+    public static int health1 = 100; // Health for Player 1
+    public static int health2 = 100; // Health for Player 2
 
     public TextMeshProUGUI text1;
     public TextMeshProUGUI text2;
@@ -17,8 +15,8 @@ public class AdvantageSystem : MonoBehaviour
     void Awake()
     {
         // โหลดค่าความเสียหายจาก PlayerPrefs เมื่อเริ่ม
-        health1 = PlayerPrefs.GetInt("Player1Health", 100);
-        health2 = PlayerPrefs.GetInt("Player2Health", 100);
+        //health1 = PlayerPrefs.GetInt("Player1Health", 100);
+        //health2 = PlayerPrefs.GetInt("Player2Health", 100);
         SetText();
     }
 
@@ -35,27 +33,15 @@ public class AdvantageSystem : MonoBehaviour
         SetText();      // Update the UI
     }
 
-    public void ModifyReroll(bool isPlayer1, int amount)
+    public void ModifyAttack(bool isPlayer1, int amount)
     {
         if (isPlayer1)
         {
-            player1Reroll += amount;
+            Attack1 += amount;
         }
         else
         {
-            player2Reroll += amount;
-        }
-    }
-
-    public void ModifyDice(bool isPlayer1, int amount)
-    {
-        if (isPlayer1)
-        {
-            player1Dice += amount;
-        }
-        else
-        {
-            player2Dice += amount;
+            Attack2 += amount;
         }
     }
 
@@ -76,8 +62,8 @@ public class AdvantageSystem : MonoBehaviour
 
     public void SetText()
     {
-        text1.text = $"Player 1\nHealth: {health1}";
-        text2.text = $"Player 2\nHealth: {health2}";
+        text1.text = $"Player 1\nHealth: {health1}\nAttack: {Attack1}";
+        text2.text = $"Player 2\nHealth: {health2}\nAttack: {Attack2}";
     }
 
     // ใช้เพื่อรีเซ็ตสุขภาพเมื่อหยุดเล่น

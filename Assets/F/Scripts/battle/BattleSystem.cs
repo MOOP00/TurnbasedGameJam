@@ -47,22 +47,20 @@ public class BattleSystem : MonoBehaviour
         // รอเวลาเล็กน้อยก่อนคำนวณผลการต่อสู้
         yield return new WaitForSeconds(delayBeforeResult);
 
-        // คำนวณผลการต่อสู้
-        int damageToPlayer2 = Mathf.Max(0, player1Roll - player2Roll);
-        int damageToPlayer1 = Mathf.Max(0, player2Roll - player1Roll);
-
-        // ปรับลดเลือดของแต่ละผู้เล่น
-        advantageSystem.ModifyHealth(true, -damageToPlayer1);  // ลดเลือด Player 1
-        advantageSystem.ModifyHealth(false, -damageToPlayer2); // ลดเลือด Player 2
-
         // แสดงผลลัพธ์การต่อสู้
-        if (damageToPlayer1 > damageToPlayer2)
+        if (player1Roll > player2Roll)
         {
+            advantageSystem.ModifyHealth(false, -AdvantageSystem.Attack1);
             battleResultText.text = "Player 1 wins the round!";
+            AdvantageSystem.Attack1 = 0;
+            AdvantageSystem.Attack2 = 0;
         }
-        else if (damageToPlayer2 > damageToPlayer1)
+        else if (player2Roll > player1Roll)
         {
+            advantageSystem.ModifyHealth(true, -AdvantageSystem.Attack2);
             battleResultText.text = "Player 2 wins the round!";
+            AdvantageSystem.Attack1 = 0;
+            AdvantageSystem.Attack2 = 0;
         }
         else
         {
@@ -71,8 +69,8 @@ public class BattleSystem : MonoBehaviour
 
         // รอเวลาก่อนวาปกลับไปยัง Scene แรก
         yield return new WaitForSeconds(delayBeforeReturn);
-        PlayerPrefs.SetInt("Player1Health", advantageSystem.health1); // บันทึกสุขภาพของ Player 1
-        PlayerPrefs.SetInt("Player2Health", advantageSystem.health2); // บันทึกสุขภาพของ Player 2
+        PlayerPrefs.SetInt("Player1Health", AdvantageSystem.health1); // บันทึกสุขภาพของ Player 1
+        PlayerPrefs.SetInt("Player2Health", AdvantageSystem.health2); // บันทึกสุขภาพของ Player 2
         UnityEngine.SceneManagement.SceneManager.LoadScene(returnSceneName);
     }
 }

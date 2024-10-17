@@ -26,8 +26,8 @@ public class TextManager : MonoBehaviour
     {
         if (advantageSystem != null)
         {
-            player1HealthText.text = "Player 1\nHealth: " + advantageSystem.health1;
-            player2HealthText.text = "Player 2\nHealth: " + advantageSystem.health2;
+            player1HealthText.text = "Player 1\nHealth: " + AdvantageSystem.health1;
+            player2HealthText.text = "Player 2\nHealth: " + AdvantageSystem.health2;
         }
     }
 }

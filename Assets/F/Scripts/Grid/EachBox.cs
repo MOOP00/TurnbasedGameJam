@@ -16,36 +16,18 @@ public class EachBox : MonoBehaviour
         _text = GetComponentInChildren<TextMeshPro>();
         gridBehavior = GameObject.Find("GridManager").GetComponent<GridBehavior>();
         advantageSystem = GameObject.Find("GridManager").GetComponent<AdvantageSystem>();
-        randomEffect = Random.Range(0, 9);
+        randomEffect = Random.Range(0, 3);
 
         switch (randomEffect)
         {
             case 0:
-                _text.text = "+6 Step";
+                _text.text = "+Health";
                 break;
             case 1:
-                _text.text = "+3 Step";
+                _text.text = "+Steps";
                 break;
             case 2:
-                _text.text = "+9 Step";
-                break;
-            case 3:
-                _text.text = "+1 Reroll";
-                break;
-            case 4:
-                _text.text = "+2 Reroll";
-                break;
-            case 5:
-                _text.text = "+5 Health";
-                break;
-            case 6:
-                _text.text = "+1 Dice";
-                break;
-            case 7:
-                _text.text = "+2 Dice";
-                break;
-            case 8:
-                _text.text = "+10 health";
+                _text.text = "+Attack";
                 break;
         }
     }
@@ -65,32 +47,14 @@ public class EachBox : MonoBehaviour
     {
         switch (randomEffect)
         {
-            case 0:
-                gridBehavior.stepLeft += 6;  // Gain 6 more steps this round
+            case 2:
+                advantageSystem.ModifyAttack(isPlayer1, Random.Range(5,11));  // Gain 6 more steps this round
                 break;
             case 1:
-                gridBehavior.stepLeft += 3;  // Gain 6 more steps this round
+                gridBehavior.stepLeft += Random.Range(3,10);  // Gain 6 more steps this round
                 break;
-            case 2:
-                gridBehavior.stepLeft += 9;  // Gain 6 more steps this round
-                break;
-            case 3:
-                advantageSystem.ModifyReroll(isPlayer1, 1);  // Gain +1 advantage
-                break;
-            case 4:
-                advantageSystem.ModifyReroll(isPlayer1, 2);  // Gain +2 advantage
-                break;
-            case 5:
-                advantageSystem.ModifyHealth(isPlayer1, 5);  // Gain -1 advantage
-                break;
-            case 6:
-                advantageSystem.ModifyDice(isPlayer1, 1);  // Gain +1 advantage
-                break;
-            case 7:
-                advantageSystem.ModifyDice(isPlayer1, 2);  // Gain +2 advantage
-                break;
-            case 8:
-                advantageSystem.ModifyHealth(isPlayer1, 10);  // Gain -1 advantage
+            case 0:
+                advantageSystem.ModifyHealth(isPlayer1, Random.Range(1,4));  // Gain -1 advantage
                 break;
         }
     }
