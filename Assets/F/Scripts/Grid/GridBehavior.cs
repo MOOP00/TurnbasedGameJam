@@ -59,8 +59,8 @@ public class GridBehavior : MonoBehaviour
         if(round%2 == 0)
             isPlayer1Turn = false;
         // Initialize starting positions
-        player1Pos = new Vector3(2, 0, gridSize / 2);  // Adjusted to be inside the perimeter
-        player2Pos = new Vector3(gridSize - 3, 0, gridSize / 2);  // Adjusted to be inside the perimeter
+        player1Pos = new Vector3(2, 0, Random.Range(2,gridSize-2));  // Adjusted to be inside the perimeter
+        player2Pos = new Vector3(gridSize - 3, 0, Random.Range(2,gridSize-2));  // Adjusted to be inside the perimeter
 
         player1.transform.position = player1Pos;
         player2.transform.position = player2Pos;
@@ -111,6 +111,14 @@ public class GridBehavior : MonoBehaviour
         if (Vector3.Distance(player1.transform.position, player2.transform.position) < 0.1f)
         {
             EnterBattleScene();
+        }
+
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            AdvantageSystem.health1 = 1;
+            AdvantageSystem.health2 = 1;
+            maxStep = 100;
+            stepLeft = 100;
         }
     }
 
