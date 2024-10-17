@@ -188,19 +188,53 @@ public class GridBehavior : MonoBehaviour
 
     Vector3 GetInputDirectionPlayer1()
     {
-        if (Input.GetKeyDown(KeyCode.W)) return (_ref.transform.forward);  // Move up
-        if (Input.GetKeyDown(KeyCode.S)) return (-_ref.transform.forward);     // Move down
-        if (Input.GetKeyDown(KeyCode.A)) return (-_ref.transform.right);     // Move left
-        if (Input.GetKeyDown(KeyCode.D)) return (_ref.transform.right);    // Move right
+        if (Input.GetKeyDown(KeyCode.W)) 
+        {
+            player1.transform.rotation = Quaternion.LookRotation(-_ref.transform.forward, Vector3.up);
+            transform.forward = -transform.forward;
+            return (_ref.transform.forward);  // Move up
+        }
+        if (Input.GetKeyDown(KeyCode.S)) 
+        {
+            player1.transform.rotation = _ref.transform.rotation;
+            return (-_ref.transform.forward);
+        }
+        if (Input.GetKeyDown(KeyCode.A)) 
+        {
+            player1.transform.rotation = Quaternion.LookRotation(_ref.transform.right, Vector3.up);
+            return (-_ref.transform.right);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            player1.transform.rotation = Quaternion.LookRotation(-_ref.transform.right, Vector3.up); 
+            return (_ref.transform.right);
+        }
         return Vector3.zero;
     }
 
     Vector3 GetInputDirectionPlayer2()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) return (_ref.transform.forward);    // Move up
-        if (Input.GetKeyDown(KeyCode.DownArrow)) return (-_ref.transform.forward);     // Move down
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) return (-_ref.transform.right);     // Move left
-        if (Input.GetKeyDown(KeyCode.RightArrow)) return (_ref.transform.right);   // Move right
+        if (Input.GetKeyDown(KeyCode.UpArrow)) 
+        {
+            player2.transform.rotation = Quaternion.LookRotation(-_ref.transform.forward, Vector3.up);
+            transform.forward = -transform.forward;
+            return (_ref.transform.forward);  // Move up
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow)) 
+        {
+            player2.transform.rotation = _ref.transform.rotation;
+            return (-_ref.transform.forward);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) 
+        {
+            player2.transform.rotation = Quaternion.LookRotation(_ref.transform.right, Vector3.up);
+            return (-_ref.transform.right);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            player2.transform.rotation = Quaternion.LookRotation(-_ref.transform.right, Vector3.up); 
+            return (_ref.transform.right);
+        }
         return Vector3.zero;
     }
 

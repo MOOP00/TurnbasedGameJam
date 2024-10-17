@@ -15,7 +15,16 @@ public class BattleSystem : MonoBehaviour
     public float delayBeforeResult = 2f; // เวลาก่อนแสดงผลลัพธ์
     public float delayBeforeReturn = 2f; // เวลาก่อนวาปกลับ
 
+    public ParticleSystem particleSystem1;
+    public ParticleSystem particleSystem2;
+    private ParticleSystem.MainModule mainModule;
     private bool battleStarted = false; // ตัวแปรบอกสถานะการเริ่มการต่อสู้
+    private bool hasPlayed = false;
+
+    void Start()
+    {
+        mainModule = GetComponent<ParticleSystem>().main;
+    }
 
     void Update()
     {
@@ -25,6 +34,12 @@ public class BattleSystem : MonoBehaviour
             battleStarted = true;
             StartCoroutine(ExecuteBattle());
         }
+    }
+
+    private void PlayParticlesOnce(ParticleSystem ps)
+    {
+        ps.Play(); // Play the particle system
+        hasPlayed = true; // Mark as played
     }
 
     private IEnumerator ExecuteBattle()
@@ -54,6 +69,7 @@ public class BattleSystem : MonoBehaviour
             battleResultText.text = "Player 1 wins the round!";
             AdvantageSystem.Attack1 = 0;
             AdvantageSystem.Attack2 = 0;
+            PlayParticlesOnce(particleSystem1);
         }
         else if (player2Roll > player1Roll)
         {
@@ -61,6 +77,7 @@ public class BattleSystem : MonoBehaviour
             battleResultText.text = "Player 2 wins the round!";
             AdvantageSystem.Attack1 = 0;
             AdvantageSystem.Attack2 = 0;
+            PlayParticlesOnce(particleSystem2);
         }
         else
         {
